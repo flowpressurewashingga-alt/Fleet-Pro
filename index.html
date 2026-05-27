@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FleetPRO">
     <title>FleetPRO</title>
-    <link rel="apple-touch-icon" href="app-icon.png">
+    <link rel="apple-touch-icon" href="https://rewashingga-alt.github.io/fleetpro/app-icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { height: 100%; width: 100%; background: #000000; display: flex; align-items: center; justify-content: center; font-family: -apple-system, sans-serif; }
@@ -20,15 +20,17 @@
     <div class="loader">
         <h1>Fleet Check</h1>
         <p>Loading...</p>
-       <script>
-        // Forces the redirect to stay inside the standalone web app window natively
-        var targetUrl = "https://script.google.com/macros/s/AKfycbxL6dEPktLTX2UCznvREwDaD4lCXuWkkBVZJlRa-0A/dev";
+           <script>
+        // Gives iOS 500 milliseconds to load the app icon before redirecting
+        var targetUrl = "https://script.google.com/macros/s/AKfycbxL6dEPktLTX2UCznvREwDaD4lCXuWkk8VZjLRoa-0A/dev";
         
-        if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-            window.location.href = targetUrl;
-        } else {
-            window.location.replace(targetUrl);
-        }
+        setTimeout(function() {
+            if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+                window.location.href = targetUrl;
+            } else {
+                window.location.replace(targetUrl);
+            }
+        }, 500); // 0.5 second pause
     </script>
 </body>
 </html>
