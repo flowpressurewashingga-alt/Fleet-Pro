@@ -20,13 +20,14 @@
     <div class="loader">
         <h1>Fleet Check</h1>
         <p>Loading...</p>
-    </div>
        <script>
         // Forces the redirect to stay inside the standalone web app window natively
+        var targetUrl = "https://script.google.com/macros/s/AKfycbxL6dEPktLTX2UCznvREwDaD4lCXuWkkBVZJlRa-0A/dev";
+        
         if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-            window.location.href = "https://script.google.com/macros/s/AKfycbxL6dEPktLTX2UCznvREwDaD4lCXuWkk8VZjLRoa-0A/dev";
+            window.location.href = targetUrl;
         } else {
-            window.location.replace("https://script.google.com/macros/s/AKfycbxL6dEPktLTX2UCznvREwDaD4lCXuWkk8VZjLRoa-0A/dev");
+            window.location.replace(targetUrl);
         }
     </script>
 </body>
