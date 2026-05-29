@@ -6,11 +6,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FleetPRO">
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <title>FleetPRO</title>
     <link rel="manifest" href="manifest.json">
-    
+
     <script>
         var iconLink = document.createElement('link');
         iconLink.rel = 'apple-touch-icon';
@@ -23,26 +23,32 @@
         html, body { height: 100%; width: 100%; background: #000000; display: flex; align-items: center; justify-content: center; font-family: -apple-system, sans-serif; }
         .loader { text-align: center; }
         .loader h1 { font-size: 22px; font-weight: 700; color: #FF9500; }
-        .loader p { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 6px; }
+        .loader p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+        .install-hint { margin-top: 24px; padding: 12px 20px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; }
+        .install-hint p { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; }
     </style>
 </head>
 <body>
     <div class="loader">
         <h1>Fleet Check</h1>
-        <p>Loading Operations...</p>
+        <p id="status">Loading...</p>
+        <div class="install-hint" id="install-hint" style="display:none">
+            <p>To install: tap the <strong style="color:rgba(255,255,255,0.7)">Share</strong> button below<br>then <strong style="color:rgba(255,255,255,0.7)">Add to Home Screen</strong></p>
+        </div>
     </div>
 
     <script>
-        // Your exact, live deployment link untouched
         var targetUrl = "https://script.google.com/macros/s/AKfycbxT5W3uzaOXfijI1KXfWDIPsImMOJ_c8LIblqkSini0dglBYIdJEViuX7PuII98mdyX/exec";
-        
-        setTimeout(function() {
-            if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-                window.location.href = targetUrl;
-            } else {
-                window.location.replace(targetUrl);
-            }
-        }, 9000);
+
+        // Only redirect when already running as an installed PWA.
+        // In regular Safari, show install instructions so the user adds
+        // THIS page (GitHub Pages URL) to home screen — not the GAS redirect target.
+        if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+            window.location.replace(targetUrl);
+        } else {
+            document.getElementById('status').textContent = 'Add to Home Screen to launch';
+            document.getElementById('install-hint').style.display = 'block';
+        }
     </script>
 </body>
 </html>
